@@ -1,0 +1,48 @@
+.card {
+  text-align: left;
+  cursor: pointer;
+  width: 300px;
+  border-radius: 3px;
+  margin: 10px 5px 10px 5px;
+  padding: 2px 0px 2px 0px;
+  background-color: #595959;
+  box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.75);
+  transition: box-shadow 0.2s ease-in-out;
+}
+.card:hover {
+  box-shadow: 5px 5px 15px 0px rgba(0,0,0,0.75);
+}
+.card img {
+  padding: 0px;
+  height: 180px;
+  width: 300px;
+}
+
+.card-title {
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 1.8em;
+  color: #bfbfbf;
+  text-shadow: 2px 2px rgba(0,0,0,0.75);
+}
+
+.card-subtitle {
+  padding: 0px 5px 0px 5px;
+  color: #bfbfbf;
+  font-weight: lighter;
+  margin-bottom: 10px;
+}
+
+.ingredients {
+  color: #8c8c8c;
+  margin: 7px 0px 5px 0px;
+  text-align: justify;
+  line-height: 95%;
+}
+
+.categories {
+  padding: 0px 5px 0px 5px;
+  color: #8c8c8c;
+  margin-bottom: auto;
+}
