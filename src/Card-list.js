@@ -5,7 +5,7 @@ import './styles/Card-list.css';
 
 export default ({ showModal }) => {
   let data = new Data().data;
-  // console.log(data);
+  console.log(data);
   return(
     <div>
      <Card cardData={data} showModal={showModal} />

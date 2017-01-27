@@ -1,11 +1,15 @@
 // import React from 'react';
-
+var keynr;
 export default () => {
   // console.log(JSON.parse(localStorage.recipesFCC));
-  let data, storedRecipe;
-  if(localStorage.recipesFCC) {storedRecipe = JSON.parse(localStorage.recipesFCC)};
-  if(!localStorage.recipesFCC) {
-    console.log("I'm inside !localstorage");
+  let data;
+  if(localStorage.recipesFCC) {
+    data = JSON.parse(localStorage.getItem('recipesFCC'));
+    console.log('localstorage present: ' + data);
+  }
+  // if(!localStorage.recipesFCC) {
+  else {
+    console.log("No localstorage");
     localStorage.recipesFCC = JSON.stringify([
       {
         key: 0,
@@ -62,12 +66,42 @@ export default () => {
         cat: ['pizza', 'dinner', 'kosher']
       }
     ]);
-    storedRecipe = localStorage.getItem(JSON.parse(localStorage.recipesFCC))
+    // storedRecipe = localStorage.getItem(JSON.parse(localStorage.recipesFCC))
+    data = JSON.parse(localStorage.getItem('recipesFCC'));
   }
-  data = storedRecipe;
-  // console.log(localStorage.recipesFCC);
-  // console.log(data);
+  // data = localStorage.getItem(JSON.parse(localStorage.recipesFCC));
+  console.log(data.length);
+  // console.log(localStorage.key(0));
+  keynr = data.length;
   return (
     {data}
   );
+};
+
+export function addEntry(props) {
+  let data = JSON.parse(localStorage.getItem('recipesFCC'));
+  
+  let newRecipe = {
+    key: keynr,
+    recipeTitle: props.recipeTitle,
+    recipeSubTitle: props.recipeSub,
+    ingredients: props.recipeIng,
+    instructions: props.recipeDirections,
+    img: props.recipeImg,
+    cat: props.recipeCat
+  };
+  data.push(newRecipe);
+  // console.log(data);
+  localStorage.setItem('recipesFCC', JSON.stringify(data));
 }
+
+// storage.setItem(keyName, keyValue);
+
+// Object
+// classes:"modal"
+// recipeCat:"cddc"
+// recipeDirections:"cdsd"
+// recipeImg:"cddc"
+// recipeIng:"cdscdscv"
+// recipeSub:"few"
+// recipeTitle:"xxc"

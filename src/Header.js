@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { addEntry } from './Card-data';
 import './styles/Header.css';
 
  class Headline extends Component {
@@ -17,11 +18,37 @@ import './styles/Header.css';
     else this.setState({classes: 'modal'});
   }
   closeModal = (data) => {
-    if(data.target.className === 'modal' || data.target.className === 'exit') this.setState({classes: 'modal hide'})
+    if(data.target.className === 'modal' || data.target.className === 'exit') this.setState({classes: 'modal hide'});
   }
   onSubmit(props) {
     props.preventDefault();
-    console.log(props);
+    this.setState({classes: 'modal hide'});
+    // console.log(this.state);
+    addEntry(this.state);
+    this.setState({recipeTitle: '', recipeImg: '', recipeSub: '', recipeCat: '', recipeDirections: '', recipeIng: ''});
+  }
+  onInputChange(props) {
+    switch (props.target.name) {
+      case 'RecipeTitle':
+        this.setState({recipeTitle: props.target.value});
+        break;
+      case 'ImgLink':
+        this.setState({recipeImg: props.target.value});
+        break;
+      case 'RecipeSubtitle':
+        this.setState({recipeSub: props.target.value});
+        break;
+      case 'Categories':
+        this.setState({recipeCat: props.target.value.replace(/\n/g, ",").split(",")});
+        break;
+      case 'TextareaDir':
+        this.setState({recipeDirections: props.target.value});
+        break;
+      case 'TextareaIng':
+        this.setState({recipeIng: props.target.value.replace(/\n/g, ",").split(",")});
+        break;
+      default: break;
+    }
   }
   render() {
   return (
@@ -35,12 +62,12 @@ import './styles/Header.css';
             <span className="exit" onClick={data => this.closeModal(data)}>x</span>
             <form onSubmit={this.onSubmit.bind(this)} >
               <div className='formLine formLine1' >
-                <label>Recipe Title: <input className='inp inp1' type="text" name="RecipeTitle" placeholder="Recipe Title" /></label>
-                <label>Image Link: <input className='inp inp3' type="text" name="imgLink" placeholder="Image Link" /></label>
+                <label>Recipe Title: <input className='inp inp1' type="text" name="RecipeTitle" value={this.state.recipeTitle} onChange={this.onInputChange.bind(this)} /></label>
+                <label>Image Link: <input className='inp inp3' type="text" name="ImgLink"  value={this.state.recipeImg} onChange={this.onInputChange.bind(this)}  /></label>
               </div>
               <div className='formLine' >
-                <label>Recipe Subtitle: <input className='inp inp2' type="text" name="RecipeSubtitle" placeholder="Recipe Subtitle" /></label>
-                <label>Categories: <input className='inp inp3' type="text" name="categories" placeholder="Categories" /></label>
+                <label>Recipe Subtitle: <input className='inp inp2' type="text" name="RecipeSubtitle" value={this.state.recipeSub} onChange={this.onInputChange.bind(this)} /></label>
+                <label>Categories: <input className='inp inp3' type="text" name="Categories" value={this.state.recipeCat} onChange={this.onInputChange.bind(this)} /></label>
               </div>
               <hr />
               <div className='formLine' >
@@ -48,8 +75,8 @@ import './styles/Header.css';
                 <label className='textAreaIngLabel' htmlFor="textarea">Ingredients: </label>
               </div>
               <div className='formLine formLine4' >
-                <textarea className='textareaDir' rows="30"></textarea>
-                <textarea className='textareaIng' rows="30"></textarea>
+                <textarea className='textareaDir' rows="30" name="TextareaDir" value={this.state.recipeDirections} onChange={this.onInputChange.bind(this)} ></textarea>
+                <textarea className='textareaIng' rows="30" name="TextareaIng" value={this.state.recipeIng} onChange={this.onInputChange.bind(this)} ></textarea>
               </div>
               <div className='formLine' >
                 <button className='btns btnCancel' type="submit">Cancel</button>
