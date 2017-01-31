@@ -5,7 +5,7 @@ export default () => {
   let data;
   if(localStorage.recipesFCC) {
     data = JSON.parse(localStorage.getItem('recipesFCC'));
-    console.log('localstorage present: ' + data);
+    console.log('localstorage present');
   }
   // if(!localStorage.recipesFCC) {
   else {
