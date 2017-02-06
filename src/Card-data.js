@@ -1,4 +1,6 @@
 // import React from 'react';
+import CardList from './Card-list';
+
 var keynr;
 export default () => {
   // console.log(JSON.parse(localStorage.recipesFCC));
@@ -93,7 +95,9 @@ export function addEntry(props) {
   data.push(newRecipe);
   // console.log(data);
   localStorage.setItem('recipesFCC', JSON.stringify(data));
+  new CardList();
 }
+
 
 // storage.setItem(keyName, keyValue);
 

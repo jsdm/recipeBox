@@ -12,9 +12,10 @@ class CardList extends Component {
     // this.state = { term: '' };
   }
   // let data = new Data().data;
-  updtData () {
+  updtData = () =>  {
     this.setState({data: new Data().data});
   }
+  // const isNewData = new Data().data;
   // console.log(data);
   render() {
     return(
@@ -24,6 +25,9 @@ class CardList extends Component {
     );
   }
 }
+// export function updtData () {
+//     this.CardList.updtData();
+//   }
 export default CardList;
 // { this.props.data.data.map({Card}) }
 // () => this.handleClick(i)
