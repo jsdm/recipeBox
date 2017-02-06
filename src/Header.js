@@ -11,14 +11,15 @@ import './styles/Header.css';
                     recipeSub: '',
                     recipeCat: '',
                     recipeDirections: '',
-                    recipeIng: ''}
+                    recipeIng: '',
+                    data: this.props.Data }
    }
   showInput = () => {
     if(this.state.classes === 'modal') this.setState({classes: 'modal hide'});
     else this.setState({classes: 'modal'});
   }
-  closeModal = (data) => {
-    if(data.target.className === 'modal' || data.target.className === 'exit') this.setState({classes: 'modal hide'});
+  closeModal = (dat) => {
+    if(dat.target.className === 'modal' || dat.target.className === 'exit') this.setState({classes: 'modal hide'});
   }
   onSubmit(props) {
     props.preventDefault();
