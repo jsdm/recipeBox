@@ -1,3 +1,9 @@
+.card-group{
+  display: flex;
+  padding: 0px 5px 5px 5px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
 .card {
   text-align: left;
   cursor: pointer;

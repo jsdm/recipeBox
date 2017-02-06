@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { addEntry } from './Card-data';
-// import CardList from './Card-list';
 import './styles/Header.css';
 
  class Headline extends Component {
@@ -25,10 +24,9 @@ import './styles/Header.css';
   onSubmit(props) {
     props.preventDefault();
     this.setState({classes: 'modal hide'});
-    // console.log(this.state);
     addEntry(this.state);
-    // CardList();
     this.setState({recipeTitle: '', recipeImg: '', recipeSub: '', recipeCat: '', recipeDirections: '', recipeIng: ''});
+    this.props.getData();
   }
   onInputChange(props) {
     switch (props.target.name) {

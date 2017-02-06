@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import Data from './Card-data';
-import Cardlist from './Card-list.js';
+import Data, { removeEntry } from './Card-data';
+import Card from './Card.js';
 import Header from './Header.js';
-// import Modal from './Modal.js';
 import './styles/App.css';
 import './styles/Modal.css';
 
@@ -16,18 +15,20 @@ class App extends Component {
                   modalHowToText: '',
                   modalImg: '',
                   modalCategories: [],
+                  modalKey: 0,
                   data: new Data().data};
     this.invertModal = this.invertModal.bind(this);
+    this.getData = this.getData.bind(this);
   }
   invertModal(e) {
     if(e !== undefined){
-      // console.log(e);
       this.setState({modalHeader: e.recipeTitle,
                     modalSubHeader: e.recipeSubTitle,
                     modalCategories: e.cat,
                     modalImg: e.img,
                     modalIngredients: e.ingredients,
-                    modalHowToText: e.instructions
+                    modalHowToText: e.instructions,
+                    modalKey: e.key
       });
     }
     if(this.state.classes === 'modal hidden') this.setState({classes: 'modal shown'});
@@ -46,6 +47,18 @@ class App extends Component {
       <li key={idx} className='modal-categories' >{ cat }</li>
     )
   }
+  getData() {
+    let updData = JSON.parse(localStorage.getItem('recipesFCC'));
+    this.setState({data: updData});
+  }
+  deleteEntry(e) {
+    removeEntry(e.target.value);
+    this.getData();
+    this.invertModal();
+  }
+  editEntry(e) {
+    // Move Modal to external component to allow for editing
+  }
   render() {
     return (
       <div className="App" onClick={ e => this.closeModalOnClick(e) } >
@@ -60,27 +73,16 @@ class App extends Component {
             <h3 className='modal-directions'>{this.state.modalHowToText}</h3>
             <h6 className='modal-cat-headline' >Categories: </h6>
             <ul className='modal-categories' >{this.state.modalCategories.map(this.showCategories)}</ul>
+            <button className='btn-delete' value={this.state.modalKey} onClick={e => this.deleteEntry(e)} >Delete</button>
+            <button className='btn-edit' value={this.state.modalKey} onClick={e => this.editEntry(e)} >Edit</button>
           </div>
         </div>
-        <Header Data={ this.data } />
-        <Cardlist showModal={this.invertModal}  />
+        <Header Data={ this.state.data } getData={ this.getData } />
+        <Card cardData={ this.state.data } showModal={ this.invertModal } />
       </div>
     );
   }
 }
 
 export default App;
-
-
-
-
-// <Header newRecipe={this.addRecipe} />
-// <Modal />
-
-// <button
-//   onClick={() => {
-//     this.setState({ count: this.state.count + 1 });
-//   }}
-// >
-// Conditional (ternary) Operator
-// this.state.classes === 'modal hidden' ? this.setState({classes: 'modal shown'} : this.setState({classes: 'modal hidden'};
+// <Cardlist showModal={this.invertModal}  />
