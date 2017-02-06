@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Data from './Card-data';
 import Cardlist from './Card-list.js';
 import Header from './Header.js';
 // import Modal from './Modal.js';
@@ -14,7 +15,8 @@ class App extends Component {
                   modalIngredients: [],
                   modalHowToText: '',
                   modalImg: '',
-                  modalCategories: []};
+                  modalCategories: [],
+                  data: new Data().data};
     this.invertModal = this.invertModal.bind(this);
   }
   invertModal(e) {
@@ -32,7 +34,6 @@ class App extends Component {
     else this.setState({classes: 'modal hidden'});
   }
   closeModalOnClick(e) {
-    // console.log(e.target);
     if(e.target.className === 'modal shown' || e.target.className === 'close') this.invertModal();
   }
   showIngredients(ing, idx) {
@@ -61,7 +62,7 @@ class App extends Component {
             <ul className='modal-categories' >{this.state.modalCategories.map(this.showCategories)}</ul>
           </div>
         </div>
-        <Header newRecipe={this.addRecipe} />
+        <Header Data={ this.data } />
         <Cardlist showModal={this.invertModal}  />
       </div>
     );
@@ -73,7 +74,7 @@ export default App;
 
 
 
-
+// <Header newRecipe={this.addRecipe} />
 // <Modal />
 
 // <button
