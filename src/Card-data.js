@@ -69,7 +69,7 @@ export default () => {
   );
 };
 
-export function addEntry(props) {
+export function addDataEntry(props) {
   let data = JSON.parse(localStorage.getItem('recipesFCC'));
   let keynr = data[data.length-1].key+1;
   let newRecipe = {
@@ -90,7 +90,7 @@ export function removeEntry(key) {
   data.splice(index, 1);
   localStorage.setItem('recipesFCC', JSON.stringify(data));
 }
-export function editEntry(props,key) {
+export function editDataEntry(props,key) {
   let data = JSON.parse(localStorage.getItem('recipesFCC'));
   let index = data.findIndex(x => x.key==key);
   data.splice(index, 1);

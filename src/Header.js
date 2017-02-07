@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { addEntry } from './Card-data';
+import { addDataEntry, editEntry } from './Card-data';
 import './styles/Header.css';
 
  class Headline extends Component {
@@ -24,10 +24,13 @@ import './styles/Header.css';
   onSubmit(props) {
     props.preventDefault();
     this.setState({classes: 'modal hide'});
-    addEntry(this.state);
+    addDataEntry(this.state);
     this.setState({recipeTitle: '', recipeImg: '', recipeSub: '', recipeCat: '', recipeDirections: '', recipeIng: ''});
     this.props.getData();
   }
+  // editEntry(props) {
+  //   console.log(props);
+  // }
   onInputChange(props) {
     switch (props.target.name) {
       case 'RecipeTitle':
