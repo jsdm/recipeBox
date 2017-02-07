@@ -43,13 +43,14 @@ class App extends Component {
     let updData = JSON.parse(localStorage.getItem('recipesFCC'));
     this.setState({data: updData});
   }
-  
+  editEntry(e) {
+    console.log(e);
+  }
   render() {
     return (
       <div className="App" onClick={ e => this.closeModalOnClick(e) } >
-        
-        <Modal data={this.state} closeModalOnClick={ this.closeModalOnClick } getData={ this.getData } invertModal={ this.invertModal } />
-        <Header Data={ this.state.data } getData={ this.getData } />
+        <Modal data={this.state} closeModalOnClick={ this.closeModalOnClick } getData={ this.getData } invertModal={ this.invertModal } editEntry={ this.editEntry } />
+        <Header data={ this.state.data } getData={ this.getData } />
         <Card cardData={ this.state.data } showModal={ this.invertModal } />
       </div>
     );
