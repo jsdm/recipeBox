@@ -24,6 +24,7 @@ export default function Modal({data, closeModalOnClick, getData, invertModal, ed
   }
   const editEntryBtn = (e) => {
     invertModal();
+    hide();
     // editEntry(data)
     // console.log(e.target);
     // Move Modal to external component to allow for editing

@@ -39,8 +39,10 @@ export default class ModalEntry extends Component {
     // this.setState({classes: 'modal hide'});
   }
   onSubmit(props) {
+    console.log(props.target);
     props.preventDefault();
     this.setState({classes: 'modal hide'});
+    
     addDataEntry(this.state);
     this.setState({recipeTitle: '', recipeImg: '', recipeSub: '', recipeCat: '', recipeDirections: '', recipeIng: ''});
     this.props.getData();
