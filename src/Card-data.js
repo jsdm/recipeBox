@@ -84,6 +84,7 @@ export function addDataEntry(props) {
   data.push(newRecipe);
   localStorage.setItem('recipesFCC', JSON.stringify(data));
 }
+// Function that deletes entry based on recieved key
 export function removeEntry(key) {
   let data = JSON.parse(localStorage.getItem('recipesFCC'));
   let index = data.findIndex(x => x.key==key);

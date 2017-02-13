@@ -13,13 +13,12 @@
 */
 
 import React, { Component } from 'react';
-import { addDataEntry, editDataEntry } from './Card-data';
+import { addDataEntry } from './Card-data';
 import './styles/Header.css';
 
 export default class ModalEntry extends Component {
   constructor(props) {
     super(props);
-    console.log(props);
     this.state = {classes: 'modal',
                   recipeTitle: '',
                   recipeImg: '',
@@ -29,26 +28,49 @@ export default class ModalEntry extends Component {
                   recipeIng: '',
                   data: this.props.data };
   }
+  componentWillReceiveProps() {
+    if(this.props.data.classes === 'modal shown' ) {
+      this.setState({recipeTitle: this.props.data.modalHeader,
+                      recipeImg: this.props.data.modalImg,
+                      recipeSub: this.props.data.modalSubHeader,
+                      recipeCat: this.props.data.modalCategories,
+                      recipeDirections: this.props.data.modalHowToText,
+                      recipeIng: this.props.data.modalIngredients});
+    }
+  }
   showInput = () => {
-    this.props.modalClicked();
-    // if(this.state.classes === 'modal') this.setState({classes: 'modal hide'});
-    // else this.setState({classes: 'modal'});
+    // this.props.modalClicked();
   }
   closeModal = (dat) => {
-    if(dat.target.className === 'modal' || dat.target.className === 'exit') this.props.modalClicked();
-    // this.setState({classes: 'modal hide'});
+    // if(dat.target.className === 'modal' || dat.target.className === 'exit')
+    // console.log(this.props)
+    // this.props.modalClicked();
   }
   onSubmit(props) {
-    console.log(props.target);
     props.preventDefault();
-    this.setState({classes: 'modal hide'});
-    
+    // console.log(props);
     addDataEntry(this.state);
-    this.setState({recipeTitle: '', recipeImg: '', recipeSub: '', recipeCat: '', recipeDirections: '', recipeIng: ''});
+    this.setState({classes: 'modal hide',
+                  recipeTitle: '',
+                  recipeImg: '',
+                  recipeSub: '',
+                  recipeCat: '',
+                  recipeDirections: '',
+                  recipeIng: ''});
     this.props.getData();
+    this.props.modalClicked();
   }
-  editEntry(props) {
-    console.log(props);
+  onReset(props) {
+    // console.log("onReset");
+    props.preventDefault();
+    this.props.modalClicked();
+    this.setState({classes: 'modal hide',
+                  recipeTitle: '',
+                  recipeImg: '',
+                  recipeSub: '',
+                  recipeCat: '',
+                  recipeDirections: '',
+                  recipeIng: ''});
   }
   onInputChange(props) {
     switch (props.target.name) {
@@ -75,10 +97,10 @@ export default class ModalEntry extends Component {
   }
   render() {
   return (
-    <div className={this.state.classes} onClick={data => this.closeModal(data)} >
+    <div onClick={data => this.closeModal(data)} >
       <div className='modal-content'>
         <span className="exit" onClick={data => this.closeModal(data)}>x</span>
-        <form onSubmit={this.onSubmit.bind(this)} >
+        <form onSubmit={this.onSubmit.bind(this)} onReset={this.onReset.bind(this)} >
           <div className='formLine formLine1' >
             <label>Recipe Title: <input className='inp inp1' type="text" name="RecipeTitle" value={this.state.recipeTitle} onChange={this.onInputChange.bind(this)} /></label>
             <label>Image Link: <input className='inp inp3' type="text" name="ImgLink"  value={this.state.recipeImg} onChange={this.onInputChange.bind(this)}  /></label>
@@ -97,7 +119,7 @@ export default class ModalEntry extends Component {
             <textarea className='textareaIng' rows="30" name="TextareaIng" value={this.state.recipeIng} onChange={this.onInputChange.bind(this)} ></textarea>
           </div>
           <div className='formLine' >
-            <button className='btns btnCancel' type="submit">Cancel</button>
+            <button className='btns btnCancel' type="reset">Cancel</button>
             <button className='btns' type="submit">Save</button>
           </div>
         </form>

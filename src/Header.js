@@ -9,6 +9,7 @@ export default class Headline extends Component {
     this.state = {classes: 'hide'}
   }
   hide = () => {
+    console.log("Header.js");
     if(this.state.classes === 'hide') this.setState({classes: ''});
     else this.setState({classes: 'hide'});
   }

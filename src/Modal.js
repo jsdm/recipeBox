@@ -22,6 +22,11 @@ export default function Modal({data, closeModalOnClick, getData, invertModal, ed
     getData();
     invertModal();
   }
+  const hide = () => {
+    console.log(hidden);
+    if(hidden === 'hidden') hidden =  '';
+    else hidden = 'hidden';
+  }
   const editEntryBtn = (e) => {
     invertModal();
     hide();
@@ -29,10 +34,6 @@ export default function Modal({data, closeModalOnClick, getData, invertModal, ed
     // console.log(e.target);
     // Move Modal to external component to allow for editing
     // Or call method in header to put info from here to there
-  }
-  const hide = () => {
-    if(hidden === 'hidden') hidden =  '';
-    else hidden = 'hidden';
   }
   return (
     <div>
